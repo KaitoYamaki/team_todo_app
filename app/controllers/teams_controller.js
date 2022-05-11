@@ -1,26 +1,24 @@
+const { ValidationError } = require('sequelize');
 const Controller = require('./controller');
-const models = require('../models')
+const models = require('../models');
 
 class TeamsController extends Controller {
-
-  // GET /create
+  //team-create
   async create(req, res) {
     res.render('teams/create');
   }
-
-  // POST /
-  // async store(req, res) {
-  //   teams.push({ ...req.body, id: index++ });
-  //   await req.flash('info', '保存しました');
-  //   res.redirect('/examples/');
-  // }
-
-  // POST /create
+  //team-post
   async store(req, res) {
     try {
-      const team = await models.Team.createWithOwner(req.user, req.body);
+      const user = req.user;
+      const team = models.Team.build({
+         name: req.body.name,
+        // name: "name",
+        ownerId: user.id
+      });
+      await team.save({fields: ['name','ownerId']});
       await req.flash('info', `新規チーム${team.name}を作成しました`);
-      res.redirect(`/`);
+      res.redirect(`/teams/${team.id}`);
     } catch (err) {
       if(err instanceof ValidationError){
         res.render('teams/create', { err: err });
