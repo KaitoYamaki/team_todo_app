@@ -27,6 +27,13 @@ class TeamsController extends Controller {
       }
     }
   }
+
+  //team-show
+  async show(req, res) {
+    const team = await models.Team.findByPk(req.params.id);
+    res.render('teams/show', { team: team});
+  }
+
 }
 
 module.exports = TeamsController;
