@@ -4,7 +4,7 @@ const models = require('../models');
 
 class TeamsController extends Controller {
   //team-create
-  async create(req, res) {
+  async create(req,res) {
     res.render('teams/create');
   }
   //team-post
@@ -32,6 +32,11 @@ class TeamsController extends Controller {
   async show(req, res) {
     const team = await models.Team.findByPk(req.params.id);
     res.render('teams/show', { team: team});
+  }
+
+  async edit(req, res) {
+    const team = await models.Team.findByPk(req.params.id); // 本ボイラープレートではログインユーザーをreq.userで取得できます
+    res.render('teams/edit', { team: team}); // "/views/users/edit.pug" を探して適用します
   }
 
 }
