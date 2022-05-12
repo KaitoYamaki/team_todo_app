@@ -10,6 +10,12 @@ module.exports = (sequelize, DataTypes) => {
         as: 'owner'
       });
     }
+    static associate(models) {
+      this.Task = this.hasMany(models.Task, {
+        foreignKey: 'teamId',
+        as: 'Team'
+      })
+    } 
   }
   Team.init({
     name: {
