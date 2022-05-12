@@ -19,7 +19,11 @@ route.resource('examples', 'examples_controller');
 // route.resource('teams', 'teams_controller');
 route.resource('teams', {controller: 'teams_controller', only: ['create','store','update','show','edit']});
 
-route.get('/teams/:team/tasks/create', forceLogin, 'tasks_controller@create')
+// route.resource('tasks', {controller: 'tasks_controller', only: ['store'] } );
+// route.get('/teams/:team/tasks/create', forceLogin, 'tasks_controller@create')
+
+const teamRoute = route.sub('/teams/:team', forceLogin);
+teamRoute.resource('tasks', {controller: 'tasks_controller', only: ['create','store'] } );
 
 // /adminのURL階層の作成。ログインチェック、管理者チェックが有効。
 const adminRoute = route.sub('/admin', forceLogin, forceAdmin);

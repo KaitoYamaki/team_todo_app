@@ -1,1 +1,22 @@
-p hello
+extends ../layout
+
+block content
+  h1 
+    a(href="/teams") 
+
+  h1 タスクの作成
+
+    //-   form.box(action=`teams/${team.id}/tasks`, method="post")
+
+  form.box(action=`/tasks/create`, method="post")
+    _csrf
+    
+    div
+      label(for="title") タイトル
+      input#title(name="title", value=title)
+    div 
+      label(for="body") 内容
+      textarea#body(name="body", value=body)
+
+    div.actions
+      input(type="submit")
