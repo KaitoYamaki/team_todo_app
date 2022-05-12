@@ -16,7 +16,8 @@ route.put('/user', forceLogin, 'users_controller@update');
 // resource style
 route.resource('examples', 'examples_controller');
 
-route.resource('teams', {controller: 'teams_controller', only: ['create','store']});
+// route.resource('teams', 'teams_controller');
+route.resource('teams', {controller: 'teams_controller', only: ['create','store','update']});
 route.get('/teams/:id', forceLogin, 'teams_controller@show');
 route.get('/teams/:id/edit', forceLogin, 'teams_controller@edit');
 
