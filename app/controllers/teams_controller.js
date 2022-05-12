@@ -29,13 +29,13 @@ class TeamsController extends Controller {
 
   //team-show
   async show(req, res) {
-    const team = await models.Team.findByPk(req.params.id);
+    const team = await models.Team.findByPk(req.params.team);
     res.render('teams/show', { team: team});
   }
 
   //team-edit
   async edit(req, res) {
-    const team = await models.Team.findByPk(req.params.id); // 本ボイラープレートではログインユーザーをreq.userで取得できます
+    const team = await models.Team.findByPk(req.params.team); // 本ボイラープレートではログインユーザーをreq.userで取得できます
     res.render('teams/edit', { team: team}); // "/views/users/edit.pug" を探して適用します
   }
 
@@ -46,7 +46,7 @@ class TeamsController extends Controller {
       team.set(req.body);
       await team.save({fields: ['name']});
       await req.flash('info', `新規チーム${team.name}を編集しました`);
-      res.redirect(`/teams/${team.id}/edit`, { team: team });
+      res.redirect(`/teams/${team.id}/edit`);
     } catch (err) {
       if(err instanceof ValidationError){
         res.render('teams/edit', { err: err });
