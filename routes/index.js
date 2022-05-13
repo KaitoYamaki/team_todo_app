@@ -17,7 +17,7 @@ route.put('/user', forceLogin, 'users_controller@update');
 route.resource('examples', 'examples_controller');
 
 // route.resource('teams', 'teams_controller');
-route.resource('teams', {controller: 'teams_controller', only: ['create','store','update','show','edit']});
+route.resource('teams', {controller: 'teams_controller', only: [ 'create', 'store', 'update', 'show', 'edit' ] });
 
 // /adminのURL階層の作成。ログインチェック、管理者チェックが有効。
 const adminRoute = route.sub('/admin', forceLogin, forceAdmin);

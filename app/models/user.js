@@ -15,14 +15,10 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(_models) {
-      this.OwnTeams = this.hasMany(models.Team, {
+      this.OwnTeams = this.hasMany(_models.Team, {
         foreignKey: 'ownerId',
         as: 'ownTeams'
       });
-    }
-    
-    static associate(_models) {
-      
     }
 
     static async generateHash(password) {
