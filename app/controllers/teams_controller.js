@@ -30,7 +30,8 @@ class TeamsController extends Controller {
   //team-show
   async show(req, res) {
     const team = await models.Team.findByPk(req.params.team);
-    res.render('teams/show', { team: team } );
+    const tasks = await team.getTask();
+    res.render('teams/show', { team: team, tasks: tasks } );
   }
 
   //team-edit
@@ -55,9 +56,6 @@ class TeamsController extends Controller {
       }
     }
   }
-
-  
-
 }
 
 module.exports = TeamsController;

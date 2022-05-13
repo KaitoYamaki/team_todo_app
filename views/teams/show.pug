@@ -5,3 +5,20 @@ block content
     a(href=`/teams/${team.id}/edit`) 編集
   p
     a(href=`/teams/${team.id}/tasks/create`) タスクの作成
+
+  h2 タスク一覧
+  table(border="1")
+    tbody 
+      th タスクID 
+      th タイトル
+      th 作成日時
+      th 操作
+
+      each task in tasks
+      
+        tr 
+          td= task.id
+          td= task.title
+          td= helpers.formatDateTime(task.createdAt)At
+          td
+            a(href=`/teams/${team.id}/tasks/${task.id}/edit`) 編集

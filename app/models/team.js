@@ -9,12 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'ownerId',
         as: 'owner'
       });
-    }
-    static associate(models) {
-      this.Task = this.hasMany(models.Task, {
+      this.Tasks = this.hasMany(models.Task, {
         foreignKey: 'teamId',
-        as: 'Team'
-      })
+        as: 'Task'
+      });
     } 
   }
   Team.init({
@@ -28,3 +26,5 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Team;
 };
+
+
