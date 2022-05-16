@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'ownerId',
         as: 'ownTeams'
       });
+      this.UserMember = this.hasMany(models.Member, {
+        foreignKey: 'userId',
+        as: 'UserMember'
+      });
     }
     
     static associate(_models) {
