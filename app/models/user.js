@@ -23,6 +23,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         as: 'UserMember'
       });
+      this.Creator = this.belongsTo(models.Task, {
+        foreignKey: 'creatorId',
+        as: 'CreatorTask'
+      });
+      this.Assignee = this.belongsTo(models.Task, {
+        foreignKey: 'assigneeId',
+        as: 'AssigneeTask'
+      });
     }
     
     static associate(_models) {
