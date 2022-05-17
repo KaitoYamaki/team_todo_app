@@ -1,5 +1,5 @@
 {
-  "name": "express-mvc-sample",
+  "name": "eslint",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -36,23 +36,40 @@
     "morgan": "~1.10.0",
     "passport": "0.5.2",
     "passport-local": "^1.0.0",
-    "pg": "^8.7.1",
+    "pg": "^8.7.3",
     "pg-hstore": "^2.3.3",
     "pg-native": "^3.0.0",
     "pluralize": "^8.0.0",
     "pug": "3.0.2",
-    "sequelize": "^6.6.2",
-    "sequelize-cli": "^6.2.0",
+    "sequelize": "^6.19.0",
+    "sudo": "^1.0.3",
     "utf-8-validate": "^5.0.5"
   },
   "devDependencies": {
     "dotenv": "^15.0.0",
-    "eslint": "^8.8.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-plugin-jest": "^26.0.0",
     "eslint-plugin-pug": "^1.2.4",
     "jest": "^27.4.7",
     "nodemon": "^2.0.12",
     "pug-lint": "^2.6.0",
+    "sequelize-cli": "^6.4.1",
     "supertest": "^6.1.6"
-  }
+  },
+  "description": "WebのMVCフレームワークを学習する為の、Express + Sequelize で構築したのBoilerplateです。 一般的なフレームワークが持っている機能を組み込んであります。",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaitoYamaki/team_todo_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaitoYamaki/team_todo_app/issues"
+  },
+  "homepage": "https://github.com/KaitoYamaki/team_todo_app#readme"
 }
