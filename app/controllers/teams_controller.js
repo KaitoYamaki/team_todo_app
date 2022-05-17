@@ -14,13 +14,13 @@ class TeamsController extends Controller {
       const team = models.Team.build({
         name: req.body.name,
         ownerId: user.id
-  });
+      });
       await team.save({ fields: ['name', 'ownerId'] });
       await req.flash('info', `新規チーム${team.name}を作成しました`);
       res.redirect(`/teams/${team.id}`);
     } catch (err) {
       if(err instanceof ValidationError){
-        res.render('teams/create', { err: err });
+        res.render('teams/create', { err: err } );
       } else {
         throw err;
       }
@@ -30,7 +30,7 @@ class TeamsController extends Controller {
   //team-show
   async show(req, res) {
     const team = await models.Team.findByPk(req.params.team);
-    const tasks = await team.getTask();
+    const tasks = await team.getTasks();
     res.render('teams/show', { team: team, tasks: tasks } );
   }
 
@@ -50,7 +50,7 @@ class TeamsController extends Controller {
       res.redirect(`/teams/${team.id}/edit`);
     } catch (err) {
       if(err instanceof ValidationError){
-        res.render('teams/edit', { err: err });
+        res.render('teams/edit', { err: err } );
       } else {
         throw err;
       }
