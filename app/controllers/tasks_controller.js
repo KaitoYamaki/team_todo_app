@@ -4,13 +4,14 @@ const models = require('../models');
 
 class TasksController extends Controller {
   //task-create
-  async create(req,res) {
-    const team = req.params.team;
-    const teamId = await models.Team.findByPk(team);
+  async create(req, res) {
+    const teamId = req.params.team;
+    const team = await models.Team.findByPk(teamId);
     const members = await team.getTeamMember({include: 'User'});
-    res.render('tasks/create', { teamId: teamId, members: members } );
-    // res.render(`tasks/create`, { team } );
+    res.render('tasks/create', { teamId, members} );
   }
+
+  
     //task-store
     async store(req, res) {
       try {
@@ -22,7 +23,8 @@ class TasksController extends Controller {
           creatorId: req.user.id,
           status: 0,
         })
-        await task.save({ fields: [ 'teamId', 'title', 'body', 'status'] });
+        
+        await task.save();
         await req.flash('info', `新規カテゴリ${task.title}を作成しました`);
         res.redirect(`/teams/${task.teamId}`);
       } catch (err) {
@@ -36,8 +38,10 @@ class TasksController extends Controller {
     
     async edit(req, res) {
       const task = await models.Task.findByPk(req.params.task);
-      const team = req.params.team;
-      res.render('tasks/edit', { team: team, task: task } );
+      const teamId = req.params.team;
+      const team = await models.Team.findByPk(teamId);
+      const members = await team.getTeamMember({include: 'User'});
+      res.render('tasks/edit', { team, task, members } );
     }
 
   async update(req, res) {

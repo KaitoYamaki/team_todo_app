@@ -8,7 +8,7 @@ block content
 
     //-   form.box(action=`teams/${team.id}/tasks`, method="post")
 
-  form.box(action=`/teams/${team}/tasks`, method="post")
+  form.box(action=`/teams/${teamId}/tasks`, method="post")
     _csrf
     
     div
@@ -18,10 +18,10 @@ block content
       label(for="body") 内容
       textarea#body(name="body")
     div
-      label(for="selectAssigneeId") 担当者
-      select(name="selectAssigneeId")
+      label(for="selectsAssigneeId") 担当者
+      select(name="selectsAssigneeId")
         option(value=0) なし
         each member in members
-          option(value=member.id) #{member.user.displayName}
+          option(value=member.User.id) #{member.User.displayName}
     div.actions
       input(type="submit")
