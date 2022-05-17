@@ -42,6 +42,7 @@
     "pluralize": "^8.0.0",
     "pug": "3.0.2",
     "sequelize": "^6.19.0",
+    "sudo": "^1.0.3",
     "utf-8-validate": "^5.0.5"
   },
   "devDependencies": {
