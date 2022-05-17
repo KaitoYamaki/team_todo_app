@@ -18,10 +18,10 @@ block content
       label(for="body") 内容
       textarea#body(name="body")
     div
-      label(for="assigneeId") 担当者
-      select(name="assigneeId")
+      label(for="selectAssigneeId") 担当者
+      select(name="selectAssigneeId")
         option(value=0) なし
         each member in members
-          option(value=member.id) #{member.userName}
+          option(value=member.id) #{member.user.displayName}
     div.actions
       input(type="submit")

@@ -7,7 +7,7 @@ class TasksController extends Controller {
   async create(req,res) {
     const team = req.params.team;
     const teamId = await models.Team.findByPk(team);
-    const members = await team.getMemberUsers();
+    const members = await team.getTeamMember({include: 'User'});
     res.render('tasks/create', { teamId: teamId, members: members } );
     // res.render(`tasks/create`, { team } );
   }
@@ -18,8 +18,8 @@ class TasksController extends Controller {
           title: req.body.title,
           body: req.body.body,
           teamId: req.params.team,
-          // assigneeId:
-          // creatorId:
+          assigneeId: req.body.selectsAssigneeId,
+          creatorId: req.user.id,
           status: 0,
         })
         await task.save({ fields: [ 'teamId', 'title', 'body', 'status'] });
