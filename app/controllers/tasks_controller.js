@@ -6,7 +6,10 @@ class TasksController extends Controller {
   //task-create
   async create(req,res) {
     const team = req.params.team;
-    res.render(`tasks/create`, { team } );
+    const teamId = await models.Team.findByPk(team);
+    const members = await team.getMemberUsers();
+    res.render('tasks/create', { teamId: teamId, members: members } );
+    // res.render(`tasks/create`, { team } );
   }
     //task-store
     async store(req, res) {
@@ -15,6 +18,8 @@ class TasksController extends Controller {
           title: req.body.title,
           body: req.body.body,
           teamId: req.params.team,
+          // assigneeId:
+          // creatorId:
           status: 0,
         })
         await task.save({ fields: [ 'teamId', 'title', 'body', 'status'] });
@@ -35,22 +40,6 @@ class TasksController extends Controller {
       res.render('tasks/edit', { team: team, task: task } );
     }
 
-  //   async update(req, res) {
-  //     try {
-  //       const task = await models.Task.findByPk(req.body.id);
-  //       task.set(req.body);
-  //       await task.save( { fields: ['title','body'] } );
-  //       await req.flash('info', `新規カテゴリ${task.title}を編集しました`);
-  //       res.redirect(`/teams/${task.teamId}`);
-  //     } catch (err) {
-  //       if(err instanceof ValidationError){
-  //         res.render('tasks/edit', { err: err });
-  //       } else {
-  //         throw err;
-  //       }
-  //     }
-  //   }
-  // }
   async update(req, res) {
     try {
       const task = await models.Task.findByPk(req.body.id); //---[1]
