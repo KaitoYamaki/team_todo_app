@@ -1,6 +1,6 @@
 const { ValidationError } = require('sequelize');
-const Controller = require('./controller');
-const models = require('../models');
+const Controller = require('../controller');
+const models = require('../../models');
 
 class TasksController extends Controller {
   //task-create
@@ -8,7 +8,7 @@ class TasksController extends Controller {
     const teamId = req.params.team;
     const team = await models.Team.findByPk(teamId);
     const members = await team.getTeamMember({include: 'User'});
-    res.render('tasks/create', { teamId, members} );
+    res.render('/manager/tasks/create', { teamId, members} );
   }
 
   
@@ -26,10 +26,10 @@ class TasksController extends Controller {
         
         await task.save();
         await req.flash('info', `新規カテゴリ${task.title}を作成しました`);
-        res.redirect(`/teams/${task.teamId}`);
+        res.redirect(`/manager/teams/${task.teamId}`);
       } catch (err) {
         if(err instanceof ValidationError){
-          res.render('tasks/create', { err: err });
+          res.render('mamanger/tasks/create', { err: err });
         } else {
 
           throw err;
@@ -42,7 +42,7 @@ class TasksController extends Controller {
       const teamId = req.params.team;
       const team = await models.Team.findByPk(teamId);
       const members = await team.getTeamMember({include: 'User'});
-      res.render('tasks/edit', { team, task, members } );
+      res.render('manager/tasks/edit', { team, task, members } );
     }
 
   async update(req, res) {
@@ -51,10 +51,10 @@ class TasksController extends Controller {
       task.set(req.body);
       await task.save({ fields: ['title', 'body'] });
       await req.flash('info', `${task.title}を変更しました`);
-      res.redirect(`/teams/${task.teamId}`);
+      res.redirect(`/manager/teams/${task.teamId}`);
     } catch (err) {
       if (err instanceof ValidationError) {
-        res.render('tasks/edit', { task: req.body, err });
+        res.render('manager/tasks/edit', { task: req.body, err });
       } else {
         throw err;
       }

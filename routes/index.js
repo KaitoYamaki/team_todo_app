@@ -17,7 +17,7 @@ route.put('/user', forceLogin, 'users_controller@update');
 route.resource('examples', 'examples_controller');
 
 route.resource('manager/teams', { controller: 'manager/teams_controller', only: [ 'create', 'store', 'update', 'show', 'edit' ] } );
-route.resource('teams', { controller: 'teams_controller', only: [ 'create', 'store', 'update', 'show', 'edit' ] } );
+route.resource('teams', { controller: 'teams_controller', only: [ 'create', 'store' ] } );
 
 const teamRoute = route.sub('/manager/teams/:team', forceLogin);
 teamRoute.resource('tasks', {controller: 'manager/tasks_controller', only: ['create','store','edit','update'] } );

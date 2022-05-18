@@ -1,4 +1,4 @@
-extends ../layout
+extends ../../layout
 
 block content
   h1 
@@ -8,7 +8,7 @@ block content
 
     //-   form.box(action=`teams/${team.id}/tasks`, method="post")
 
-  form.box(action=`/teams/${teamId}/tasks`, method="post")
+  form.box(action=`/manager/teams/${teamId}/tasks`, method="post")
     _csrf
     
     div
