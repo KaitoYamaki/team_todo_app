@@ -14,8 +14,8 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate(_models) {
-      this.OwnTeams = this.hasMany(_models.Team, {
+    static associate(models) {
+      this.OwnTeams = this.hasMany(models.Team, {
         foreignKey: 'ownerId',
         as: 'ownTeams'
       });
@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         as: 'UserMember'
       });
-      this.Creator = this.belongsTo(models.Task, {
+      this.Creator = this.hasMany(models.Task, {
         foreignKey: 'creatorId',
         as: 'CreatorTask'
       });
-      this.Assignee = this.belongsTo(models.Task, {
+      this.Assignee = this.hasMany(models.Task, {
         foreignKey: 'assigneeId',
         as: 'AssigneeTask'
       });

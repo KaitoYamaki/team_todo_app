@@ -31,6 +31,7 @@ class TasksController extends Controller {
         if(err instanceof ValidationError){
           res.render('tasks/create', { err: err });
         } else {
+
           throw err;
       }
     }
