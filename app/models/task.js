@@ -20,7 +20,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Task.init({
-    teamId: DataTypes.INTEGER,
+    teamId: {
+      type: DataTypes.STRING,
+      validate: {
+        allowNull: false
+    } },
     title: DataTypes.STRING,
     body: DataTypes.STRING,
     status: DataTypes.INTEGER

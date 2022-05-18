@@ -11,17 +11,11 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.Tasks = this.hasMany(models.Task, {
         foreignKey: 'teamId',
-        as: 'Task'
+        as: 'Tasks'
       });
       this.TeamMember = this.hasMany(models.Member, {
         foreignKey: 'teamId',
         as: 'TeamMember'
-      });
-      this.MemberUsers = this.belongsToMany(models.User, {
-        through: 'Member',
-        foreignKey: 'teamId',
-        otherKey: 'userId',
-        as: 'MemberUsers'
       });
     } 
   }

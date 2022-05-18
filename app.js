@@ -1,4 +1,4 @@
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', function(err) {
   console.error(err);
   console.error(err.stack);
 });
@@ -7,11 +7,12 @@ const fs = require('fs');
 const path = require('path');
 
 const rootDir = path.join(__dirname, './');
-const envPath = path.join(rootDir, (process.env.NODE_ENV === 'test') ? '.env.test' : '.env');
+const envPath = 
+path.join(rootDir, (process.env.NODE_ENV === 'test') ? '.env.test' : '.env');
 
 if (fs.existsSync(envPath)) {
   console.log(`> read ${envPath}`);
-  const result = require('dotenv').config({ path: envPath });
+  const result = require('dotenv').config( { path: envPath } );
   if (result.error) {
     throw result.error;
   }
@@ -29,7 +30,7 @@ const passport = require('passport');
 const methodOverride = require('method-override');
 const csrf = require('csurf');
 const i18n = require('i18n');
-const { flash } = require('express-flash-message');
+const {flash} = require('express-flash-message');
 const helpers = require('./lib/helpers');
 const debug = require('debug')('express-mvc:request:params');
 

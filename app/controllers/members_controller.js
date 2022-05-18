@@ -7,8 +7,9 @@ class MembersController extends Controller {
   async index(req, res){
     const team = await models.Team.findByPk(req.params.team);
     const users = await models.User.findAll();
-    const memberUsers = await team.getMemberUsers();
-    res.render('members/index', { team: team, memberUsers: memberUsers, users: users} );
+    // const memberUsers = await team.getMemberUsers();
+    const memberUsers = await team.getTeamMember({include: 'User'});
+    res.render('members/index', { team, users, memberUsers} );
   }
 
   async store(req, res) {
@@ -18,7 +19,7 @@ class MembersController extends Controller {
         userId: req.body.userId,
         teamId: team,
       })
-      await member.save({ fields: [ 'userId', 'teamId'] });
+      await member.save();
       await req.flash('info', '新規メンバーを追加しました');
       res.redirect(`/teams/${member.teamId}/members`);
     } catch (err) {

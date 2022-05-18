@@ -31,10 +31,11 @@ class TasksController extends Controller {
         if(err instanceof ValidationError){
           res.render('tasks/create', { err: err });
         } else {
+
           throw err;
-        }
       }
     }
+  }
     
     async edit(req, res) {
       const task = await models.Task.findByPk(req.params.task);

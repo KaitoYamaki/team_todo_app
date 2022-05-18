@@ -14,7 +14,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate(_models) {
+    static associate(models) {
       this.OwnTeams = this.hasMany(models.Team, {
         foreignKey: 'ownerId',
         as: 'ownTeams'
@@ -31,10 +31,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assigneeId',
         as: 'AssigneeTask'
       });
-    }
-    
-    static associate(_models) {
-      
     }
 
     static async generateHash(password) {
