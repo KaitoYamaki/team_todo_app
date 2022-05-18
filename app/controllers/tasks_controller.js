@@ -23,7 +23,6 @@ class TasksController extends Controller {
           creatorId: req.user.id,
           status: 0,
         })
-        
         await task.save();
         await req.flash('info', `新規カテゴリ${task.title}を作成しました`);
         res.redirect(`/teams/${task.teamId}`);
