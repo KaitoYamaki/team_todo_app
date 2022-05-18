@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         as: 'UserMember'
       });
-      this.Creator = this.belongsTo(models.Task, {
+      this.Creator = this.hasMany(models.Task, {
         foreignKey: 'creatorId',
         as: 'CreatorTask'
       });
-      this.Assignee = this.belongsTo(models.Task, {
+      this.Assignee = this.hasMany(models.Task, {
         foreignKey: 'assigneeId',
         as: 'AssigneeTask'
       });
