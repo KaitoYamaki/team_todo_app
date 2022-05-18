@@ -19,6 +19,18 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'ownerId',
         as: 'ownTeams'
       });
+      this.UserMember = this.hasMany(models.Member, {
+        foreignKey: 'userId',
+        as: 'UserMember'
+      });
+      this.Creator = this.belongsTo(models.Task, {
+        foreignKey: 'creatorId',
+        as: 'CreatorTask'
+      });
+      this.Assignee = this.belongsTo(models.Task, {
+        foreignKey: 'assigneeId',
+        as: 'AssigneeTask'
+      });
     }
 
     static async generateHash(password) {

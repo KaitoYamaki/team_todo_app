@@ -4,6 +4,8 @@ block content
   p 
     a(href=`/teams/${team.id}/edit`) 編集
   p
+    a(href=`/teams/${team.id}/members`) メンバー管理
+  p
     a(href=`/teams/${team.id}/tasks/create`) タスクの作成
 
   h2 タスク一覧
@@ -11,6 +13,7 @@ block content
     tbody 
       th タスクID 
       th タイトル
+      th 担当者
       th 作成日時
       th 操作
 
@@ -19,6 +22,7 @@ block content
         tr 
           td= task.id
           td= task.title
+          td= task.Assignee.displayName
           td= helpers.formatDateTime(task.createdAt)
           td
             a(href=`/teams/${team.id}/tasks/${task.id}/edit`) 編集
