@@ -18,13 +18,14 @@ class MembersController extends Controller {
       const member = models.Member.build({
         userId: req.body.userId,
         teamId: team,
+        role: 0
       })
       await member.save();
       await req.flash('info', '新規メンバーを追加しました');
       res.redirect(`/manager/teams/${member.teamId}/members`);
     } catch (err) {
       if(err instanceof ValidationError){
-        res.render('manager/tasks/create', { err: err });
+        res.render('tasks/create', { err: err });
       } else {
         throw err;
       }

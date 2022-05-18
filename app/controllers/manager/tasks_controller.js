@@ -8,7 +8,7 @@ class TasksController extends Controller {
     const teamId = req.params.team;
     const team = await models.Team.findByPk(teamId);
     const members = await team.getTeamMember({include: 'User'});
-    res.render('/manager/tasks/create', { teamId, members} );
+    res.render('manager/tasks/create', { teamId, members} );
   }
 
   
