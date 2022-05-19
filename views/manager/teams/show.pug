@@ -1,0 +1,28 @@
+extends ../../layout
+block content
+  h1 #{team.name}
+  p 
+    a(href=`/manager/teams/${team.id}/edit`) 編集
+  p
+    a(href=`/manager/teams/${team.id}/members`) メンバー管理
+  p
+    a(href=`/manager/teams/${team.id}/tasks/create`) タスクの作成
+
+  h2 タスク一覧
+  table(border="1")
+    tbody 
+      th タスクID 
+      th タイトル
+      th 担当者
+      th 作成日時
+      th 操作
+
+      each task in tasks
+      
+        tr 
+          td= task.id
+          td= task.title
+          td= task.Assignee.displayName
+          td= helpers.formatDateTime(task.createdAt)
+          td
+            a(href=`/manager/teams/${team.id}/tasks/${task.id}/edit`) 編集
