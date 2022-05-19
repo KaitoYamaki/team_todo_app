@@ -22,7 +22,9 @@ class TasksController extends Controller {
           assigneeId: req.body.selectsAssigneeId,
           creatorId: req.user.id,
           status: 0,
-        })
+        });
+        // console.log(task.id);
+        console.log(task);
         await task.save();
         await req.flash('info', `新規カテゴリ${task.title}を作成しました`);
         res.redirect(`/teams/${task.teamId}`);
