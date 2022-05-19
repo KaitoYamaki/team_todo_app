@@ -22,5 +22,9 @@ block content
       each memberUser in memberUsers
       
         tr 
-        td= memberUser.role
+        if memberUser.role === 1
+          td= 'マネージャー'
+        else 
+          td= '一般ユーザー'
+        //- td= memberUser.role
         td= memberUser.User.displayName

@@ -23,7 +23,7 @@ block content
           td= task.title 
           td= user.displayName 
           td= helpers.formatDateTime(task.createdAt)
-          td 
+          td
             a(href=`/tasks/${task.id}`) 詳細
             
     h2 所属しているチーム
@@ -38,9 +38,13 @@ block content
         tr
           td= member.Team.id
           td= member.Team.name
-          td= member.role
+            if member.role === 1
+              td= 'マネージャー'
+            else 
+              td= '一般ユーザー'
           td= helpers.formatDateTime(member.Team.createdAt)
           td
-            a(href=`/manager/teams/${member.Team.id}`) 管理
+            if member.role === 1
+              a(href=`/manager/teams/${member.Team.id}`) 管理
   else
     p ログインしてから操作してください
