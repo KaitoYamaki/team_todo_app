@@ -19,7 +19,7 @@ class TasksController extends Controller {
           title: req.body.title,
           body: req.body.body,
           teamId: req.params.team,
-          assigneeId: req.body.userId,
+          assigneeId: req.body.selectsAssigneeId,
           creatorId: req.user.id,
           status: 0,
         });
