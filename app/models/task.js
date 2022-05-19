@@ -22,9 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   Task.init({
     teamId: {
       type: DataTypes.STRING,
-      validate: {
-        allowNull: false
-      } 
+      allowNull: false
     },
     title: DataTypes.STRING,
     body: DataTypes.STRING,

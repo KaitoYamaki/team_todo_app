@@ -19,7 +19,7 @@ class TasksController extends Controller {
           title: req.body.title,
           body: req.body.body,
           teamId: req.params.team,
-          assigneeId: req.body.selectsAssigneeId,
+          assigneeId: req.body.userId,
           creatorId: req.user.id,
           status: 0,
         });
@@ -30,6 +30,7 @@ class TasksController extends Controller {
         res.redirect(`/teams/${task.teamId}`);
       } catch (err) {
         if(err instanceof ValidationError){
+          console.log(err);
           res.render('tasks/create', { err: err });
         } else {
 
