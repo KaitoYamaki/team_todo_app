@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         where: { teamId: this.id }
       });
       const member = manageMember[0]
-      return
+      return member.role === 1
     };
 
   }
