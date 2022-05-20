@@ -5,35 +5,47 @@ const models = require('../models');
 class TasksController extends Controller {
   //task-create
   async create(req, res) {
-    const team = req.params.team;
-    res.render(`tasks/create`, { team } );
+    const teamId = req.params.team;
+    const team = await models.Team.findByPk(teamId);
+    const members = await team.getTeamMember({include: 'User'});
+    res.render('tasks/create', { teamId, members} );
   }
-  //task-store
-  async store(req, res) {
-    try {
-      const task = models.Task.build({
-        title: req.body.title,
-        body: req.body.body,
-        teamId: req.params.team,
-        status: 0,
-      })
-      await task.save({ fields: [ 'teamId', 'title', 'body', 'status'] });
-      await req.flash('info', `新規カテゴリ${task.title}を作成しました`);
-      res.redirect(`/teams/${task.teamId}`);
-    } catch (err) {
-      if(err instanceof ValidationError){
-        res.render('tasks/create', { err: err });
-      } else {
+
+  
+    //task-store
+    async store(req, res) {
+      try {
+        const task = models.Task.build({
+          title: req.body.title,
+          body: req.body.body,
+          teamId: req.params.team,
+          assigneeId: req.body.selectsAssigneeId,
+          creatorId: req.user.id,
+          status: 0,
+        });
+        // console.log(task.id);
+        console.log(task);
+        await task.save();
+        await req.flash('info', `新規カテゴリ${task.title}を作成しました`);
+        res.redirect(`/teams/${task.teamId}`);
+      } catch (err) {
+        if(err instanceof ValidationError){
+          console.log(err);
+          res.render('tasks/create', { err: err });
+        } else {
+
           throw err;
       }
     }
   }
     
-  async edit(req, res) {
-    const task = await models.Task.findByPk(req.params.task);
-    const team = req.params.team;
-    res.render('tasks/edit', { team: team, task: task } );
-  }
+    async edit(req, res) {
+      const task = await models.Task.findByPk(req.params.task);
+      const teamId = req.params.team;
+      const team = await models.Team.findByPk(teamId);
+      const members = await team.getTeamMember({include: 'User'});
+      res.render('tasks/edit', { team, task, members } );
+    }
 
   async update(req, res) {
     try {
