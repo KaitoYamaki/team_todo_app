@@ -13,3 +13,15 @@ module.exports = async function managableTeam(req, res, next) {
     await req.flash('alert', 'アクセスできません');
       res.redirect('/');
 }; 
+
+
+
+module.exports = async function managableTeam(req, res, next) {
+    // 省略
+  
+    if (!await team.isManager(user)) {
+      await req.flash('alert', 'アクセスできません');
+      res.redirect('/');
+    }
+    return next();
+  };
