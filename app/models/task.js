@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     body: DataTypes.STRING,
-    status: DataTypes.INTEGER
+    status: DataTypes.INTEGER,
+    creatorId: DataTypes.INTEGER,
+    assigneeId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Task',
