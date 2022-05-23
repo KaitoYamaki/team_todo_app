@@ -5,7 +5,7 @@ block content
     a(href="/teams") 
 
   h1 タスクの新規作成
-  form.box(action=`/manager/teams/${teamId}/tasks`, method="post")
+  form.box(action=`/manager/teams/${team.id}/tasks`, method="post")
     _method post
     _csrf
 

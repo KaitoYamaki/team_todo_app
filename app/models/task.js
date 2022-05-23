@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'タイトルは空ではいけません'
         },
         len: {
-          args: [1, 0],
+          args: [1, 10],
           msg: 'タイトルは10文字未満です'
         },
       }
