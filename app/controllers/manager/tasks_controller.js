@@ -8,7 +8,7 @@ class TasksController extends Controller {
     const teamId = req.params.team;
     const team = await models.Team.findByPk(teamId);
     const members = await team.getTeamMember({include: 'User'});
-    res.render('manager/tasks/create', { teamId, members} );
+    res.render('manager/tasks/create', { team, members} );
   }
 
   
@@ -30,7 +30,9 @@ class TasksController extends Controller {
         res.redirect(`/manager/teams/${task.teamId}`);
       } catch (err) {
         if(err instanceof ValidationError){
-          res.render('mamanger/tasks/create', { err: err });
+          const team = await models.Team.findByPk(req.params.team);
+          const members = await team.getTeamMember({ include: 'User' });
+          res.render('manager/tasks/create', { team, members, err: err });
         } else {
 
           throw err;

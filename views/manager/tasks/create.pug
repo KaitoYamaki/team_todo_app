@@ -1,18 +1,18 @@
 extends ../../layout
 
 block content
-  //- - if(err)
-  //-   - const errors = err.errors
-  //-   ul.errors
-  //-     each error in err.errors
-  //-       li= error.message
   h1 
     a(href="/teams") 
 
   h1 タスクの新規作成
-  form.box(action=`/manager/teams/${teamId}/tasks`, method="post")
+  form.box(action=`/manager/teams/${team.id}/tasks`, method="post")
     _method post
     _csrf
+
+    - if(err)
+      ul.errors
+        each error in err.errors
+          li= error.message
     
     div
       label(for="title") タイトル
