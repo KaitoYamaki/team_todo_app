@@ -32,16 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         role: 1
       });
       return team;
+    }
+    async isManager(user) {
+      const manageMember = await user.getUserMember({ where: { teamId: this.id, role: 1 }});
+      return Boolean(manageMember.length);
     };
-
-    static async isManager(user) {
-      const manageMember = await user.getUserMember({
-        where: { teamId: this.id }
-      });
-      const member = manageMember[0]
-      return member.role === 1
-    };
-
   }
   Team.init({
     name: {
