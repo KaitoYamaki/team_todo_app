@@ -29,6 +29,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const methodOverride = require('method-override');
 const csrf = require('csurf');
+//18n
 const i18n = require('i18n');
 const {flash} = require('express-flash-message');
 const helpers = require('./lib/helpers');
