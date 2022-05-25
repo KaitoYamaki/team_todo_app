@@ -3,7 +3,8 @@
 	"views": {
 		"Profile": "Profile",
 		"AssignedTasks": "Assigned Tasks",
-		"BelongedTeam": "The team you belong to"
+		"BelongedTeam": "The team you belong to",
+		"CreateTeam": "Create a team"
 		
 	},
 	"models": {

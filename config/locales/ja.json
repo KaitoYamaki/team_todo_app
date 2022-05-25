@@ -3,7 +3,8 @@
 	"views": {
 		"Profile": "プロフィール",
 		"AssignedTasks": "アサインされているタスク",
-		"BelongedTeam": "所属しているチーム"
+		"BelongedTeam": "所属しているチーム",
+		"CreateTeam": "チームを作成する"
 	},
 	"models": {
 		"User": {

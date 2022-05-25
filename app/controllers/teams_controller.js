@@ -5,6 +5,7 @@ const models = require('../models');
 class TeamsController extends Controller {
   //team-create
   async create(req, res) {
+    req.setLocale(req.query.lang || 'ja');
     res.render('teams/create');
   }
   //team-post
