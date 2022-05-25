@@ -3,6 +3,7 @@ const models = require('../models');
 
 class TopController extends Controller {
     async index(req, res) {
+      req.setLocale(req.query.lang || 'ja');
       if(req.user) {
         const tasks = await models.Task.findAll({
           where: { assigneeId: req.user.id },
