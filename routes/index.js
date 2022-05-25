@@ -1,6 +1,7 @@
 const { Route } = require('../lib/route');
 const forceLogin = require('../app/middlewares/force_login');
 const forceAdmin = require('../app/middlewares/force_admin');
+const managable_team = require('../app/middlewares/managable_team');
 
 const route = new Route();
 
@@ -16,10 +17,10 @@ route.put('/user', forceLogin, 'users_controller@update');
 // resource style
 route.resource('examples', 'examples_controller');
 
-route.resource('manager/teams', { controller: 'manager/teams_controller', only: [ 'create', 'store', 'update', 'show', 'edit' ] } );
+route.resource('manager/teams', managable_team, { controller: 'manager/teams_controller', only: [ 'create', 'store', 'update', 'show', 'edit' ] } );
 route.resource('teams', { controller: 'teams_controller', only: [ 'create', 'store' ] } );
 
-const teamRoute = route.sub('/manager/teams/:team', forceLogin);
+const teamRoute = route.sub('/manager/teams/:team', forceLogin, managable_team);
 teamRoute.resource('tasks', {controller: 'manager/tasks_controller', only: ['create','store','edit','update'] } );
 teamRoute.resource('members', {controller: 'manager/members_controller', only: ['index', 'store'] } );
 
