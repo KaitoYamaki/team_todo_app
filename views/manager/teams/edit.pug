@@ -6,6 +6,11 @@ block content
     _csrf
     _method put
 
+    - if(err)
+      ul.errors
+        each error in err.errors
+          li= error.message
+
     input(type='hidden' , name='id', value=team.id)
     
     div

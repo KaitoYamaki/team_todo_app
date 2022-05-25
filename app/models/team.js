@@ -1,4 +1,6 @@
 'use strict';
+const models = require('../models');
+
 const {
   Model
 } = require('sequelize');
@@ -17,11 +19,33 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'teamId',
         as: 'TeamMember'
       });
-    } 
+    }
+    static async createWithOwner(user, body){
+      const team = await this.create({
+        name: body.name,
+        ownerId: user.id
+      });
+      console.log(team);
+      await team.createTeamMember({
+        teamId: team.id,
+        userId: user.id,
+        role: 1
+      });
+      return team;
+    }
+    async isManager(user) {
+      const manageMember = await user.getUserMember({ where: { teamId: this.id, role: 1 }});
+      return Boolean(manageMember.length);
+    };
   }
   Team.init({
     name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'チーム名は必須です'
+        },
+      }
     },
     ownerId: DataTypes.INTEGER
   }, {

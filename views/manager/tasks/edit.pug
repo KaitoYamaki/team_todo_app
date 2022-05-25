@@ -5,6 +5,11 @@ block content
    form.box(action=`/manager/teams/${team}/tasks/${task.id}`, method="post")
     _csrf
     _method put
+
+    - if(err)
+      ul.errors
+        each error in err.errors
+          li= error.message
     
     input(type='hidden', name='id', value=task.id)
     div
