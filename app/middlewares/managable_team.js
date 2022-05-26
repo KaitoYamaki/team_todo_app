@@ -8,6 +8,6 @@ module.exports = async function managableTeam(req, res, next) {
   if(manageMember.length>0) {
     return next();
   }
-    await req.flash('alert', 'アクセスできません');
-      res.redirect('/');
+  await req.flash('alert', 'アクセスできません');
+    res.redirect('/');
 }; 
