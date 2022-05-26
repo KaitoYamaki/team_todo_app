@@ -8,6 +8,10 @@ class TasksController extends Controller {
     const task = await Task.findByPk(taskId);
     res.render('tasks/show', { task: task });
   }
+
+  async comment(req, res) {
+    
+  }
 }
 
 module.exports = TasksController; 

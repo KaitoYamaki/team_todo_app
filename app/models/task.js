@@ -22,7 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         as: 'taskComment'
       });
     }
-  };
+    static async createComment(user) {
+      const manageMember = await user.getUserMember({ where: { teamId: this.id, role: 1 }});
+      return Boolean(manageMember.length);
+    };
+  }
   Task.init({
     teamId: {
       type: DataTypes.STRING,
