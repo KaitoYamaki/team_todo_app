@@ -1,11 +1,9 @@
 const Controller = require('./controller');
 const models = require('../models');
-const Task = models.Task;
 
 class TasksController extends Controller {
   async show(req, res) {
-    const taskId = req.params.task;
-    const task = await Task.findByPk(taskId);
+    const task = await models.Task.findByPk(req.params.team);
     res.render('tasks/show', { task: task });
   }
 }

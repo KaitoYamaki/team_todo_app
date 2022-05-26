@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         name: body.name,
         ownerId: user.id
       });
-      console.log(team);
       await team.createTeamMember({
         teamId: team.id,
         userId: user.id,
