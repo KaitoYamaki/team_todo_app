@@ -5,11 +5,6 @@ const managable_team = require('../app/middlewares/managable_team');
 
 const route = new Route();
 
-// function style
-// route.get('/', function (req, res, _next) {
-//   res.render('index', { title: 'Express', user: req.user });
-// });
-
 route.get('/', 'top_controller@index')
 
 // single style
@@ -21,6 +16,8 @@ route.resource('examples', 'examples_controller');
 
 route.resource('manager/teams', managable_team, { controller: 'manager/teams_controller', only: [ 'create', 'store', 'update', 'show', 'edit' ] } );
 route.resource('teams', { controller: 'teams_controller', only: [ 'create', 'store' ] } );
+
+// route.post('/tasks/:task/comments', forceLogin, 'tasks_controller@comment');
 
 const teamRoute = route.sub('/manager/teams/:team', forceLogin, managable_team);
 teamRoute.resource('tasks', {controller: 'manager/tasks_controller', only: ['create','store','edit','update'] } );

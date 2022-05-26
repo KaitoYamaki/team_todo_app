@@ -1,6 +1,15 @@
 extends ../layout
 
 block content
-  h1 チーム#{task.teamId} / タスク#{task.id}
+  h1 チーム#{team.name} / タスク#{task.id}
   h2 内容
   p #{task.body}
+  h2 コメント
+  h2 タスクの新規作成
+  form(action=`/tasks/${task.id}/comments`, method="post")
+    _csrf
+    div
+      label(for="message") メッセージ
+      textarea#message(name="message")
+    div.actions
+      input(type="submit")
