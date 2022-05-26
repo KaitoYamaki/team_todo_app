@@ -10,9 +10,6 @@ block content
       div.action
       input(type="submit")
 
-
-
-
   h2 メンバー一覧
   table(border="2")
     tbody 
@@ -20,11 +17,9 @@ block content
       th 名前
 
       each memberUser in memberUsers
-      
         tr 
         if memberUser.role === 1
           td= 'マネージャー'
         else 
           td= '一般ユーザー'
-        //- td= memberUser.role
         td= memberUser.User.displayName
