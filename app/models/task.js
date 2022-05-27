@@ -17,9 +17,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assigneeId',
         as: 'Assignee'
       });
-      this.TaskComment = this.hasMany(models.Comment, {
+      this.Comments = this.hasMany(models.Comment, {
         foreignKey: 'taskId',
-        as: 'taskComment'
+        as: 'Comments'
       });
     }
     static async createComment(user) {
@@ -31,15 +31,13 @@ module.exports = (sequelize, DataTypes) => {
       const task = await this.update({ 
         status: 1
       });
-      await task.createComment({
+      await task.createComments({
         taskId: task.id,
         creatorId: user.id,
-        message: body.message,
+        message: body.comment,
         kind: 1
       });
     }
-
-    as  
   }
   Task.init({
     teamId: {

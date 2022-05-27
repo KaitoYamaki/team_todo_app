@@ -1,5 +1,6 @@
 const Controller = require('./controller');
 const models = require('../models');
+const { ValidationError } = require('sequelize');
 
 class TasksController extends Controller {
   async show(req, res) {
@@ -11,7 +12,7 @@ class TasksController extends Controller {
   async show(req, res) {
     const task = await models.Task.findByPk(req.params.task);
     const team = await task.getTeamTask();
-    const comments = await task.gettaskComment({ include: User})
+    const comments = await task.getComments({ include: 'User' })
     res.render('tasks/show', { task: task, team: team, comments: comments });
   }
 
@@ -22,8 +23,8 @@ class TasksController extends Controller {
         task.finish(req.user, req.body);
       } else {
         await models.Comment.create({
-          taskId: req.params.id,
-          creatorid: req.user.id,
+          taskId: req.params.task,
+          creatorId: req.user.id,
           message: req.body.comment,
           kind: 0
         });

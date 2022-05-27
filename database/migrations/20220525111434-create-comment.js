@@ -19,6 +19,7 @@ module.exports = {
         references: { model: 'Users', key: 'id'}
       },
       message: {
+        allowNull: false,
         type: Sequelize.TEXT
       },
       kind: {
