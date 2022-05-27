@@ -1,6 +1,5 @@
 const Controller = require('./controller');
 const models = require('../models');
-const team = require('../models/team');
 
 class TasksController extends Controller {
   async show(req, res) {
