@@ -3,7 +3,8 @@ block content
   h1 
     a(href="/teams") 
 
-  h1 チーム作成
+  //- h1 チーム作成
+  h1= __('views.CreateTeam')
 
   form.box(action="/teams", method="post")
     _csrf

@@ -17,8 +17,28 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assigneeId',
         as: 'Assignee'
       });
+      this.Comments = this.hasMany(models.Comment, {
+        foreignKey: 'taskId',
+        as: 'Comments'
+      });
     }
-  };
+    static async createComment(user) {
+      const manageMember = await user.getUserMember({ where: { teamId: this.id, role: 1 }});
+      return Boolean(manageMember.length);
+    };
+
+    async finish(user, body){
+      const task = await this.update({ 
+        status: 1
+      });
+      task.createComment({
+        taskId: task.id,
+        creatorId: user.id,
+        message: body.comment,
+        kind: 1
+      });
+    }
+  }
   Task.init({
     teamId: {
       type: DataTypes.STRING,

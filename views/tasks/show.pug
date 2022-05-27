@@ -1,6 +1,35 @@
 extends ../layout
-
 block content
-  h1 #{team.name} / タスク#{task.id}
+  h1 チーム#{team.name} / タスク#{task.id}
   h2 内容
-  p #{task.body}
+  p #{task.body} 
+
+  h2 コメント
+  ul
+    each comment in comments
+      li= comment.message
+      |  #{helpers.formatDateTime(comment.createdAt)} #{comment.User.displayName}
+      
+  form(action=`/tasks/${task.id}/comments`, method="post")
+    _method post
+    _csrf
+
+    - if(err)
+      ul.errors
+        each error in err.errors
+          li= error.message
+
+    p メッセージ
+    textarea.area(name="comment", cols="50", rows="5")
+    if (task.status === 0)
+      div.check
+        label 完了報告
+        input(type="checkbox", name="status", value=1)
+    else
+      p.check 既に完了報告済みです
+    div.check
+      button(type="submit") 送信 
+
+
+
+      

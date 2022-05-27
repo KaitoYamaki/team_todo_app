@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assigneeId',
         as: 'AssigneeTask'
       });
+      this.Assignee = this.hasMany(models.Comment, {
+        foreignKey: 'creatorId',
+        as: 'userComment'
+      });
     }
 
     static async generateHash(password) {
