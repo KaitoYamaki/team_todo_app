@@ -26,6 +26,20 @@ module.exports = (sequelize, DataTypes) => {
       const manageMember = await user.getUserMember({ where: { teamId: this.id, role: 1 }});
       return Boolean(manageMember.length);
     };
+
+    async finish(user, body){
+      const task = await this.update({ 
+        status: 1
+      });
+      await task.createComment({
+        taskId: task.id,
+        creatorId: user.id,
+        message: body.message,
+        kind: 1
+      });
+    }
+
+    as  
   }
   Task.init({
     teamId: {

@@ -24,6 +24,7 @@ teamRoute.resource('tasks', {controller: 'manager/tasks_controller', only: ['cre
 teamRoute.resource('members', {controller: 'manager/members_controller', only: ['index', 'store'] } );
 
 route.get('/tasks/:task', 'tasks_controller@show');
+route.post('/tasks/:task/comments', forceLogin, 'tasks_controller@comment');
 
 // /adminのURL階層の作成。ログインチェック、管理者チェックが有効。
 const adminRoute = route.sub('/admin', forceLogin, forceAdmin);
