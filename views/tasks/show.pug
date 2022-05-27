@@ -9,6 +9,7 @@ block content
     each comment in comments
       li= comment.message
       |  #{helpers.formatDateTime(comment.createdAt)} #{comment.User.displayName}
+      
   form(action=`/tasks/${task.id}/comments`, method="post")
     _method post
     _csrf
@@ -19,12 +20,16 @@ block content
           li= error.message
 
     p メッセージ
-    textarea(name="comment")
+    textarea.area(name="comment", cols="50", rows="5")
     if (task.status === 0)
-      div
+      div.check
         label 完了報告
         input(type="checkbox", name="status", value=1)
     else
-      p 既に完了報告済みです
-    div
+      p.check 既に完了報告済みです
+    div.check
       button(type="submit") 送信 
+
+
+
+      

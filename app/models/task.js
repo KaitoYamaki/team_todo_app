@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       const task = await this.update({ 
         status: 1
       });
-      await task.createComments({
+      task.createComment({
         taskId: task.id,
         creatorId: user.id,
         message: body.comment,

@@ -3,13 +3,7 @@ const models = require('../models');
 const { ValidationError } = require('sequelize');
 
 class TasksController extends Controller {
-  async show(req, res) {
-    const task = await models.Task.findByPk(req.params.task);
-    const team = await task.getTeamTask();
-    res.render('tasks/show', { task: task, team: team });
-  }
-
-  async show(req, res) {
+ async show(req, res) {
     const task = await models.Task.findByPk(req.params.task);
     const team = await task.getTeamTask();
     const comments = await task.getComments({ include: 'User' })
@@ -20,6 +14,7 @@ class TasksController extends Controller {
     try{
       if(req.body.status === '1') {
         const task = await models.Task.findByPk(req.params.task);
+        console.log(task);
         task.finish(req.user, req.body);
       } else {
         await models.Comment.create({
@@ -32,7 +27,8 @@ class TasksController extends Controller {
       res.redirect(`/tasks/${req.params.task}`)
     } catch (err) {
       if(err instanceof ValidationError) {
-        res.render('tasks/show', { err: err });
+        const task = await models.Task.findByPk(req.params.task);
+        res.render('tasks/show', { err, task } );
       } else{
         throw err;
       }
