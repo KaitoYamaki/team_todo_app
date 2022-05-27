@@ -20,7 +20,8 @@ class TeamsController extends Controller {
       res.redirect(`/manager/teams/${team.id}`);
     } catch (err) {
       if(err instanceof ValidationError){
-        res.render('manager/teams/create', { err: err } );
+        const team = await models.Team.findByPk(req.params.team);
+        res.render('manager/teams/edit', { team: team, err: err });
       } else {
         throw err;
       }

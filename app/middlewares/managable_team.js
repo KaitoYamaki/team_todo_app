@@ -8,4 +8,3 @@ module.exports = async function managableTeam(req, res, next) {
   }
   return next();
 };
-
